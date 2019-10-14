@@ -1,0 +1,7 @@
+2019-10-13 06:15:13 Debug: Notice (1024): Please change the value of 'Security.salt' in app/config/core.php to a salt value specific to your application in [CORE\cake\libs\debugger.php, line 556]
+2019-10-13 19:30:21 Debug: Notice (8): Undefined variable: paginator in [APP\views\posts\index.ctp, line 17]
+2019-10-14 03:48:47 Debug: Notice (8): Undefined variable: xhtml in [APP\views\subidas\index.ctp, line 3]
+2019-10-14 04:00:42 Debug: Notice (8): Undefined property: View::$form in [APP\views\subidas\index.ctp, line 3]
+2019-10-14 05:04:25 Debug: Notice (8): Undefined index: type in [CORE\cake\libs\view\helpers\form.php, line 202]
+2019-10-14 05:04:25 Debug: Notice (8): Undefined index: type in [CORE\cake\libs\view\helpers\form.php, line 219]
+2019-10-14 05:04:25 Debug: Notice (8): Undefined index: default in [CORE\cake\libs\view\helpers\form.php, line 224]
