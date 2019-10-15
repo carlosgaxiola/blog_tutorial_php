@@ -1,3 +1,3 @@
 <pre>
-	<?php print_r($data) ?>
+	<?php //echo __DIR__ . DS . '..' . DS . 'webroot' . DS . 'files' . DS . 'test.xls';; ?>
 </pre>

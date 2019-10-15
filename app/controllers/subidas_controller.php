@@ -26,17 +26,18 @@ class SubidasController extends AppController {
 
 		// $this->testxls();
 
-		$this->xls2csv();
+		$this->csv2MySQL();
+
 		// $this->set('data', $this->data);
 		// $this->Session->setFlash($_FILES['data'])
 		// echo "<pre>";
 		// print_r($this->data);
 		// echo "</pre>";
-		$this->redirect(array('action' => 'index'));
+		// $this->redirect(array('action' => 'index'));
 		// $this->render('home');
 	}
 
-	 public function testxls() { 
+	public function testxls() { 
 	 	App::import('Vendor', 'PHPExcel', array('file' => 'PHPExcel.php'));
 	 	$folderToSaveXls = 'C://xampp/htdocs/cakephp/blog_tutorial/app/webroot/files'; 
 	 	$objPHPExcel = new PHPExcel(); 
@@ -57,10 +58,10 @@ class SubidasController extends AppController {
 		$objWriter->save( $folderToSaveXls . '/test.xls' ); 
 	} 
 
-	public function xls2csv () {
+	function xls2csv () {
 		App::import('Vendor', 'PHPExcel', array('file' => 'PHPExcel.php'));
-		$xslPath = 'C://xampp/htdocs/cakephp/blog_tutorial/app/webroot/files/test.xls';
-		$csvPath = 'C://xampp/htdocs/cakephp/blog_tutorial/app/webroot/files/test.csv';
+		$xslPath = __DIR__ . DS . '..' . DS . 'webroot' . DS . 'files' . DS . 'test.xls';
+		$csvPath = __DIR__ . DS . '..' . DS . 'webroot' . DS . 'files';
 
 		$objReader = PHPExcel_IOFactory::createReader('Excel2007');
 		$objPHPExcelReader = $objReader->load($xslPath);
@@ -71,14 +72,37 @@ class SubidasController extends AppController {
 
 		foreach($loadedSheetNames as $sheetIndex => $loadedSheetName) {
 		    $objWriter->setSheetIndex($sheetIndex);
-		    $objWriter->save($loadedSheetName.'.csv');
+		    $csvPath = $csvPath . DS . $loadedSheetName . '.csv';
+		    $objWriter->save($csvPath);
+
 		}
+	}
+
+	function csv2MySQL () {
+		$csvPath =  __DIR__ . DS . '..' . DS . 'webroot' . DS . 'files' . DS . 'Worksheet.csv';
+	    $file = fopen($csvPath, "r");
+    	$first = true;
+        while (($row = fgetcsv($file, 10000, ",")) !== FALSE) {
+        	if ($first) {
+        		$first = false;
+        		$headers = $row;
+        		$data = array();
+        	} else if (!empty($row[0])) {
+        		$this->Subida->create();
+        		foreach ($row as $key => $value) {
+        			if (!empty($row[$key])) {
+		        		$data['Subida'][strtolower($headers[$key])] = $value;
+        			}
+        		}
+        		echo $this->Subida->save($data)? 'subido': 'no';
+        	}
+        }
 	}
 
 	function xls2csv2 () {
 		$arr_data = array();
 		App::import('Vendor', 'PHPExcel', array('file' => 'PHPExcel.php'));
-        $objPHPExcel = PHPExcel_IOFactory::load('C://xampp/htdocs/cakephp/blog_tutorial/app/webroot/files/test.xls');
+        $objPHPExcel = PHPExcel_IOFactory::load(__DIR__ . DS . '..' . DS . 'webroot' . DS . 'files' . DS . 'test.xls');
         $cell_collection = $objPHPExcel->getActiveSheet()->getCellCollection();
         foreach($cell_collection as $cell)
         {

@@ -5,3 +5,4 @@
 2019-10-14 05:04:25 Debug: Notice (8): Undefined index: type in [CORE\cake\libs\view\helpers\form.php, line 202]
 2019-10-14 05:04:25 Debug: Notice (8): Undefined index: type in [CORE\cake\libs\view\helpers\form.php, line 219]
 2019-10-14 05:04:25 Debug: Notice (8): Undefined index: default in [CORE\cake\libs\view\helpers\form.php, line 224]
+2019-10-15 06:05:48 Debug: Notice (8): Undefined variable: data in [APP\views\subidas\add.ctp, line 2]
